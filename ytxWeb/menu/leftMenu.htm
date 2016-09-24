@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" /> 
+    <base target="mainFrame" />
+    <title>无标题页</title>
+    <link href="../css/myadmin.css" rel="stylesheet" type="text/css" />
+    <style>
+
+        body
+        {
+            background: #424242;
+        }
+        .ulb
+        {
+            padding-left:10px;
+            background-color:#424242;
+            }
+    </style>
+
+    <script src="../js/jquery-1.10.1.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        var id = 0;
+        $(document).ready(function() {
+            $('a').on('click', function() {
+
+                $.each($('a'), function(index, value) {
+                    $(this).parent().attr("class", "b");
+                    //$(this).attr("target","mainFrame");
+                });
+                $(this).parent().attr("class", "b_hover");
+            });
+            var _height = $(document).height();
+            var _lineheight = String((_height - 200) / 40) + "px";
+
+            $('.b a').css("height", _lineheight).css("line-height", _lineheight);
+            $('.b_hover a').css("height", _lineheight).css("line-height", _lineheight);
+            /////////////////////////////////////////////
+            $('.ulb').hide();
+//            $('.ps').hide();
+//            $('#fgc91').show();
+        });
+        function accordion(obj) {
+            $('.ulb').hide();
+            $('#' + obj).show();
+        }
+        $.post("/User.ashx?method=IsHJT",
+               function(data) {
+                   if (data.state == 1) {
+                       //隐藏菜单
+                       $('.hjt').show();
+                       $('.ytx').hide();
+                   } else {
+                   $('.hjt').hide();
+                   $('.ytx').show();
+                   }
+               },
+               "json");
+    </script>
+
+</head>
+<body>
+    <div id="left">
+        <div id="innerLeft">
+            <div id="xl" id="gc" style="display: block">
+                <ul id="sfgc91" class="t" onclick="w('fgc91')">
+                    <li class="t1">管理</li></ul>
+                <ul class="ps" id="fgc91">
+                
+                    <li class="b_hover"><a href="../Console/Console.aspx" target="mainFrame">控制台</a></li>
+                    <li class="b"><a href="javascript:void(0);" onclick="accordion('ulb1')">应用管理</a>
+                    </li>
+                    <ul class="ulb" id="ulb1">
+                        <li class="b"><a href="../Console/App/AppList.aspx" target="mainFrame">应用列表</a></li>
+                        <li class="b"><a href="../Console/App/AppInfo.aspx" target="mainFrame">创建应用</a></li></ul>
+                    <li class="b"><a href="javascript:void(0);" onclick="accordion('ulb2')">体验</a></li>
+                    <ul class="ulb" id="ulb2">
+                        <li class="b"><a href="../Console/App/DemoTest.aspx" target="mainFrame">功能体验</a></li>
+                        <li class="b"><a href="../Account/testNumber.aspx" target="mainFrame">测试号码管理</a></li></ul>
+                    <li class="b"><a href="javascript:void(0);" onclick="accordion('ulb3')">模板</a></li>
+                    <ul class="ulb" id="ulb3">
+                        <li class="b"><a href="../Console/Sms/TemplateList.aspx" target="mainFrame">模板列表</a></li>
+                        <li class="b"><a href="../Console/Sms/TemplateSMS.aspx" target="mainFrame">新增模板</a></li></ul>
+                    <li class="b"><a href="../Console/TB_Log/TBLog.aspx" target="mainFrame">平台日志</a></li>
+                </ul>
+                <ul id="sfgc96" class="t" onclick="w('fgc96')">
+                    <li class="t2">产品</li></ul>
+                <ul class="ps" id="fgc96">
+                    <li class="b"><a href="../Console/App/Batch_Send_SMS.aspx" target="mainFrame">发送短信</a></li>
+                </ul>
+                <ul id="sfgc92" class="t" onclick="w('fgc92')">
+                    <li class="t2">财务</li></ul>
+                <ul class="ps" id="fgc92">
+                    <li class="b"><a href="javascript:void(0);" onclick="accordion('ulb4')">财务信息</a></li>
+                    <ul class="ulb" id="ulb4">
+                        <li class="b"><a href="../DetailList/monthBill.aspx" target="mainFrame">月结账单</a></li>
+                        <li class="b"><a href="../DetailList/ratesDetail.aspx" target="mainFrame">资费配置</a></li>
+                    </ul>
+                    <li class="b"><a href="../Payment/ALI/payment.aspx" target="_blank">充值</a></li>
+                    <li class="b ytx"><a href="../Account/CharegeList.aspx" target="mainFrame">充值信息</a></li>
+                    <li class="b hjt"><a href="../Account/HJTChargeList.aspx" target="mainFrame">充值信息</a></li>
+                    <li class="b"><a href="javascript:void(0);" onclick="accordion('ulb5')">发票信息</a></li>
+                    <ul class="ulb" id="ulb5">
+                        <li class="b"><a href="../Invoice/demandInvoice.aspx" target="mainFrame">索要发票</a></li>
+                        <li class="b"><a href="../Invoice/InvoiceList.aspx" target="mainFrame">开票记录</a></li>
+                    </ul>
+                </ul>
+                <ul id="sfgc93" class="t" onclick="w('fgc93')">
+                    <li class="t3">详单</li></ul>
+                <ul class="ps" id="fgc93">
+                    <li class="b"><a  href="javascript:void(0);" onclick="accordion('ulb6')">消费详单</a></li>
+                    <ul class="ulb" id="ulb6">
+                        <li class="b"><a href="../DetailList/DetailLists.aspx?type=0" target="mainFrame">消费概要</a></li>
+                        <li class="b"><a href="../DetailList/DetailLists.aspx?type=1" target="mainFrame">短信</a></li>
+                        <li class="b"><a href="../DetailList/DetailLists.aspx?type=2" target="mainFrame">语音验证码</a></li>
+                         <li class="b"><a href="../DetailList/DetailLists.aspx?type=6" target="mainFrame">语音通知</a></li>
+                        <li class="b"><a href="../DetailList/DetailLists.aspx?type=3" target="mainFrame">流量</a></li>
+                        <li class="b"><a href="../DetailList/DetailLists.aspx?type=4" target="mainFrame">电话回拨</a></li>
+                        <li class="b"><a href="../DetailList/DetailLists.aspx?type=5" target="mainFrame">电话会议</a></li>
+                        <li class="b hjt"><a href="../Account/HJTBills.aspx" target="mainFrame">话聚通</a></li>
+
+                    </ul>
+                </ul>
+                <ul id="sfgc94" class="t" onclick="w('fgc94')">
+                    <li class="t4">统计</li></ul>
+                <ul class="ps" id="fgc94">
+                    <li class="b"><a href="../Statistical/summary.aspx" target="mainFrame">概述</a></li>
+                    <li class="b"><a href="../Statistical/consumeStatis.aspx?ff=2" target="mainFrame">充值统计</a></li>
+                    <li class="b"><a href="../Statistical/consumeStatis.aspx?ff=1" target="mainFrame">消费统计</a></li>
+                </ul>
+                <ul id="sfgc95" class="t" onclick="w('fgc95')">
+                    <li class="t5">帐号</li></ul>
+                <ul class="ps" id="fgc95">
+                    <li class="b"><a  href="javascript:void(0);" onclick="accordion('ulb7')">帐号管理</a></li>
+                      <ul class="ulb" id="ulb7">
+                        <li class="b"><a href="../Account/accountBase.aspx" target="mainFrame">基础资料</a></li>
+                        <li class="b"><a href="../Account/authenInfo.aspx" target="mainFrame">认证信息</a></li>
+                        <li class="b"><a href="../Account/modifyPwd.aspx" target="mainFrame">密码设置</a></li>
+                    </ul>
+                    <li class="b"><a href="../Account/MsgNotify.aspx" target="mainFrame">消息通知</a></li>
+                </ul>
+            </div>
+
+            <script src="../js/js.js" type="text/javascript"></script>
+
+        </div>
+    </div>
+</body>
+</html>
